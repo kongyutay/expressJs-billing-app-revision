@@ -21,22 +21,23 @@
             
             <h2><a href="/account/create">添加账单</a></h2>
             <div class="space-y-4">
-                <% accounts.forEach(item => { %>
-                <div class="bg-blue-100 p-4 rounded">
-                    <div class="flex justify-between">
-                        <span class="text-sm text-gray-500"><%= item.time %></span>
-                        <%= item.title %>
-                        <span class="<%= item.type==='-1' ? 'bg-yellow-400' : 'bg-green-500' %> text-white text-sm px-2 py-1 rounded"><%= item.type === '-1' ? '支出' : '收入' %></span>
-                        <span class="text-sm text-gray-700"><%= item.account %> 元</span>
+                <% accounts.forEach((item) => { %>
+                    <div class="bg-blue-100 p-4 rounded">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-500"><%= item.time %></span>
+                            <%= item.title %>
+                            <span class="<%= item.type === '-1' ? 'bg-yellow-400' : 'bg-green-500'%> text-white text-sm px-2 py-1 rounded"><%= item.type === '-1' ? '支出' : '收入'%></span>
+                            <span class="text-sm text-gray-700"><%= item.account %> 元</span>
+                        </div>
+                        <div class="mt-2 text-gray-700">
+                            <%= item.remarks %>
+                        </div>
+                        <a class="delBtn" href="/account/<%= item.id %>">
+                            <span class="remove">X</span>
+                        </a>
                     </div>
-                    <div class="mt-2 text-gray-700">
-                        <%= item.remarks %>
-                    </div>
-                    <a class="delBtn" href="/account/<%= item.id%>">
-                        <span class="remove">X</span>
-                    </a>
-                </div>
-                <% }) %>
+
+                <% })%>
             </div>
         </div>
     </div>
