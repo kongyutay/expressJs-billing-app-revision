@@ -37,8 +37,13 @@ router.get('/account/create', function(req, res, next) {
 router.get('/account/:id', function(req, res, next) {
   //删除逻辑
   let id = req.params.id
-  db.get('accounts').remove({ id }).write()
-  res.render('success', { msg: '删除成功', url: '/account' });
+  AccountModel.deleteOne({_id: id}, (err, data) => {
+    if(err){
+      res.status(500).send('删除失败')
+      return
+    }
+    res.render('success', { msg: '删除成功', url: '/account' });
+  })
 });
 
 module.exports = router;
