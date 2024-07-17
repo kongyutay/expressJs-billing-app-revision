@@ -1,6 +1,14 @@
 {
   "accounts": [
     {
+      "id": "wbKZrp5QJ",
+      "title": "买鼠标",
+      "time": "今天",
+      "type": "-1",
+      "account": "3000",
+      "remarks": ""
+    },
+    {
       "id": "6v0FfTnAH",
       "title": "测试3",
       "time": "今天",
