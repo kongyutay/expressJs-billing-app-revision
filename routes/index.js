@@ -9,8 +9,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/account', function(req, res, next) {
-  let accounts = db.get('accounts').value()
-  res.render('list', {accounts});
+  AccountModel.find().sort({time: -1}).exec((err, data) => {
+    if(err) {
+      res.status(500).send('读取失败')
+    }
+    //把数据传给ejs
+    res.render('list', {accounts: data, moment: moment});
+    
+  })
 });
 
 router.post('/account', function(req, res, next) {
