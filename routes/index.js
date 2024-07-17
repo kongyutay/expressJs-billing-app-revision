@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync(__dirname + '/../data/db.json')
-const db = low(adapter)
-const shortid = require('shortid')
+const moment = require('moment');
+const AccountModel = require('../models/AccountModel');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,10 +15,13 @@ router.get('/account', function(req, res, next) {
 
 router.post('/account', function(req, res, next) {
   //处理表单逻辑
-  let id = shortid.generate()
-  db.get('accounts').unshift({id, ...req.body}).write();
-  console.log(req.body)
-  res.render('success', { msg: '添加成功', url: '/account' });
+  AccountModel.create({...req.body, time: moment(req.body.time).toDate()}, (err, data)=> {
+    if(err) {
+      res.status(500).send('插入失败')
+      return
+    }
+    res.render('success', { msg: '添加成功', url: '/account' });
+  })
 });
 
 router.get('/account/create', function(req, res, next) {
